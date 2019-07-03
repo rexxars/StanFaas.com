@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import BlockContent from '@sanity/block-content-to-react';
+import BlockContent from './BlockContent';
 
 const styles = makeStyles(() => ({
   card: {
@@ -58,7 +58,6 @@ const PostCard = ({
             <BlockContent
               blocks={body}
               imageOptions={{ w: 320, h: 240, fit: 'max' }}
-              {...client.config()}
             />
           </Typography>
         </CardContent>

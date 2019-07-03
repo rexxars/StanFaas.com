@@ -3,9 +3,10 @@ import imageUrlBuilder from '@sanity/image-url';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import BlockContent from '@sanity/block-content-to-react';
+
 import client from '../client';
 import Layout from '../components/Layout';
+import BlockContent from '../components/BlockContent';
 
 const urlFor = source => imageUrlBuilder(client).image(source);
 
@@ -20,21 +21,6 @@ const styles = makeStyles(theme => ({
     width: '100%'
   }
 }));
-
-const serializers = (classname, defaultAlt) => ({
-  types: {
-    image: ({ node }) => (
-      <figure className={classname}>
-        <img src={urlFor(node).url()} alt={defaultAlt} />
-      </figure>
-    ),
-    captionedImage: ({ node }) => (
-      <figure className={classname}>
-        <img src={urlFor(node).url()} alt={node.alt} />
-      </figure>
-    )
-  }
-});
 
 const Post = ({
   title = 'Missing title',
@@ -69,9 +55,7 @@ const Post = ({
         )}
         <BlockContent
           blocks={body}
-          serializers={serializers(classes.hello, title)}
           imageOptions={{ fit: 'fill' }}
-          {...client.config()}
         />
       </Paper>
     </Layout>
